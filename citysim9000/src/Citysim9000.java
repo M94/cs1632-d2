@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /*
  Austin Choi
  CS1632 F15
@@ -18,6 +20,7 @@ public class Citysim9000 {
     public static final Path CHIRP_ST = new Path("Chirp St", new Place[]{BOOKSTORE, UNIVERSITY});
     
     public static final int N_DRIVERS = 4;
+    public static final int RAND_BOUND = 2;
     
     public static void main(String[] args) {
         // Get seed
@@ -33,11 +36,16 @@ public class Citysim9000 {
         // Create drivers
         Place startLoc[] = {MALL, BOOKSTORE, COFFEE, UNIVERSITY, OUTSIDE};
         Driver drivers[] = spawnDrivers(N_DRIVERS, startLoc);
+        // Create random number generator
+        Random rand = new Random(seed);
         // Iterate drivers
         for (Driver driver: drivers) {
-            do {
-                System.out.println(driver.drive(0));
-            } while (driver.location != OUTSIDE);
+            int iteration = 0;
+            while ((driver.location == OUTSIDE && iteration++ > 0) == false) {
+                int direction = rand.nextInt(RAND_BOUND);
+                System.out.println(driver.drive(direction));
+            }
+            System.out.println("Driver " + driver.id + " has left the city!");
         }
     }
     

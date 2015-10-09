@@ -22,6 +22,7 @@ public class Path {
     }
     
     /*
+    Returns next possible location from source.
     Returns source if no destination possible
     */
     public Place from(Place source) {

@@ -23,7 +23,7 @@ public class Driver {
         Place destination = path.from(source);
         if (destination != source) {
             location = destination;
-            return "Driver " + id + " heading from " + source + " to " + destination + ".";
+            return "Driver " + id + " heading from " + source + " to " + destination + " via " + path + ".";
         }
         return "";
     }
