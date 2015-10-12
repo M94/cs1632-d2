@@ -13,6 +13,7 @@ public class Citysim9000 {
     public static final Place COFFEE = new Place("Coffee Shop");
     public static final Place UNIVERSITY = new Place("University");
     public static final Place OUTSIDE = new Place("Outside City");
+    public static final Place[] ALL_PLACES = {MALL, BOOKSTORE, COFFEE, UNIVERSITY, OUTSIDE};
     
     public static final Path FOURTH_AVE = new Path("Fourth Ave", new Place[]{OUTSIDE, MALL, BOOKSTORE});
     public static final Path FIFTH_AVE = new Path("Fifth Ave", new Place[]{OUTSIDE, UNIVERSITY, COFFEE});
@@ -34,24 +35,25 @@ public class Citysim9000 {
             System.exit(1);
         }
         // Create drivers
-        Place startLoc[] = {MALL, BOOKSTORE, COFFEE, UNIVERSITY, OUTSIDE};
-        Driver drivers[] = spawnDrivers(N_DRIVERS, startLoc);
+        Driver drivers[] = spawnDrivers(N_DRIVERS, ALL_PLACES);
         // Create random number generator
         Random rand = new Random(seed);
         // Iterate drivers
         for (Driver driver: drivers) {
             int iteration = 0;
-            while ((driver.location == OUTSIDE && iteration++ > 0) == false) {
+            while ((driver.location() == OUTSIDE && iteration++ > 0) == false) {
                 int direction = rand.nextInt(RAND_BOUND);
                 System.out.println(driver.drive(direction));
             }
-            System.out.println("Driver " + driver.id + " has left the city!");
+            System.out.println("Driver " + driver.id + " has left the city!\n-----");
         }
     }
     
-    /*
-    Returns -1 if not an integer.
-    */
+    /**
+     * 
+     * @param arg Number in string format
+     * @return seed integer on success || -1 if arg not an integer.
+     */
     public static int getSeed(String arg) {
         for (int i = 0; i < arg.length(); i++) {
             char c = arg.charAt(i);
@@ -60,6 +62,11 @@ public class Citysim9000 {
         return Integer.parseInt(arg);
     }
     
+    /**
+     * @param n Number of drivers to spawn
+     * @param locations Places to spawn at
+     * @return Array of spawned drivers
+     */
     public static Driver[] spawnDrivers(int n, Place locations[]) {
         Driver drivers[] = new Driver[n];
         for (int i = 0; i < n; i++) {

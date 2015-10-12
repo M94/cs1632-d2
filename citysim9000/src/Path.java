@@ -1,20 +1,12 @@
 public class Path {
     
-    public String name;
+    public final String name;
     private Place places[];
 
     public Path(String name, Place places[]) {
         this.name = name;
         this.places = places;
-        // Add path reference to each place
-        for (Place p: places) {
-            for (int i = 0; i < p.paths.length; i++) {
-                if (p.paths[i] == null) {
-                    p.paths[i] = this;
-                    continue;
-                }
-            }
-        }
+        for (Place p: places) p.addPath(this);
     }
     
     public String toString() {

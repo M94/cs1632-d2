@@ -5,20 +5,25 @@
  */
 public class Driver {
     
-    int id;
-    Place location;
+    public final int id;
+    private Place location;
 
     public Driver(int id, Place location) {
         this.id = id;
         this.location = location;
     }
+    
+    public Place location() {
+        return location;
+    }
 
-    /*
-    Return empty string if stuck in the same location.
-    */
+    /**
+     * Go to next location on path.
+     * @param direction Determines path from location
+     * @return Status update if successful || Empty string if stuck in the same location
+     */
     public String drive(int direction) {
-        System.out.println(location.paths[0]);
-        Path path = location.paths[direction % location.paths.length];
+        Path path = location.getPath(direction);
         Place source = location;
         Place destination = path.from(source);
         if (destination != source) {
