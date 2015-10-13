@@ -4,6 +4,4 @@ Deliverable 2
 
 Austin Choi
 
-IDE: NetBeans
-
 Libraries: jUnit, Mockito
