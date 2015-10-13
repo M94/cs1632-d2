@@ -55,6 +55,7 @@ public class Citysim9000 {
      * @return seed integer on success || -1 if arg not an integer.
      */
     public static int getSeed(String arg) {
+        if (arg.length() == 0) return -1;
         for (int i = 0; i < arg.length(); i++) {
             char c = arg.charAt(i);
             if (c < '0' || c > '9') return -1;

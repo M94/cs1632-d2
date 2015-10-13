@@ -1,3 +1,9 @@
+/*
+ Austin Choi
+ CS1632 F15
+ Deliverable 2
+ */
+
 public class Path {
     
     public final String name;
@@ -13,10 +19,10 @@ public class Path {
         return name;
     }
     
-    /*
-    Returns next possible location from source.
-    Returns source if no destination possible
-    */
+    /**
+     *Returns next possible location from source.
+     *Returns source if no destination possible
+     */
     public Place from(Place source) {
         for (int i = 0; i < places.length; i++) {
             if (places[i] == source) {

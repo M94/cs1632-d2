@@ -1,3 +1,9 @@
+/*
+ Austin Choi
+ CS1632 F15
+ Deliverable 2
+ */
+
 public class Place {
     
     public static final int MAX_PATHS = 2;
@@ -17,14 +23,20 @@ public class Place {
         return paths[i % paths.length];
     }
     
-    public void addPath(Path p) {
+    /**
+     * Add the selected path.
+     * Returns index of path in array on success.
+     * Returns -1 on failure.
+     */
+    public int addPath(Path p) {
         // Add path to next non-null spot in array
         for (int i = 0; i < paths.length; i++) {
             if (paths[i] == null) {
                 paths[i] = p;
-                break;
+                return i;
             }
         }
+        return -1;
     }
 
     public String toString() {
